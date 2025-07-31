@@ -7,31 +7,29 @@ import time , sys , subprocess
 
 st.set_page_config(page_title="PDF and Web Chat", layout="wide")
 
-st.markdown(
-    """
-    <style>
-    [data-testid="stSidebar"] {
-        min-width: 400px;
-        max-width: 450px;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
 
 st.title("🤖 Chat with documents / web pages ")
 st.subheader("💫 Just add your content and start chatting with it! 💫")
 
 # ---------------- Sidebar ----------------
 with st.sidebar:
-    st.html("""
-      <style>
-        [alt=Logo] {
-          height: 5rem;
-        }
-      </style>
-            """)
-    st.logo("https://github.com/pratik-gond/temp_files/blob/main/image-removebg-preview.png?raw=true" ,size="large")
+
+    # === BRANDING SECTION ===
+    st.markdown(
+        "<div style='text-align: center; margin: 2px 0;'>"
+        "<a href='https://www.buildfastwithai.com/' target='_blank' style='text-decoration: none;'>"
+        "<div style='border: 2px solid #e0e0e0; border-radius: 6px; padding: 4px; "
+        "background: linear-gradient(145deg, #ffffff, #f5f5f5); "
+        "box-shadow: 0 2px 6px rgba(0,0,0,0.1); "
+        "transition: all 0.3s ease; display: inline-block; width: 100%;'>"
+        "<img src='https://github.com/Shubhwithai/chat-with-qwen/blob/main/company_logo.png?raw=true' "
+        "style='width: 100%; max-width: 100%; height: auto; border-radius: 8px; display: block;' "
+        "alt='Build Fast with AI Logo'>"
+        "</div>"
+        "</a>"
+        "</div>",
+        unsafe_allow_html=True
+    )
     st.title("⚙️ Configuration")
     gemini_api_key = st.text_input(
         "Enter your Gemini API key:",
@@ -79,8 +77,11 @@ with st.sidebar:
                     st.error(f"Ingestion failed: {e}")
     st.markdown("""
             <div class="sidebar-footer">
-            ❤️ Built by <a href="https://buildfastwithai.com" target="_blank">Build Fast with AI</a>
+            <p>❤️ Built by <a href="https://buildfastwithai.com" target="_blank">Build Fast with AI</a></p>
+           
+            <p>👨‍💻 <a href="https://github.com/MissLostCodes/Chat_with_pdf_or_webpage" target="_blank">Github</a></p>
             </div>
+        
         """, unsafe_allow_html=True)
 
 # ---------------- Main Chat UI ----------------
@@ -121,7 +122,6 @@ if st.session_state.get("kb_ready"):
         # Clear the session state
         st.session_state.clear()
         st.info("Restarting app from scratch…")
-        st.rerun(scope="app")
         st.markdown("""
                 <meta http-equiv="refresh" content="0">
             """, unsafe_allow_html=True)
