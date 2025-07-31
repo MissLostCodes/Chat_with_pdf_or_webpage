@@ -5,15 +5,6 @@ import os
 import shutil
 import time , sys , subprocess
 
-
-
-
-def restart_streamlit_app():
-    python = sys.executable
-    script = sys.argv[0]
-    subprocess.Popen([python, "-m", "streamlit", "run", script])
-    os._exit(0)
-
 st.set_page_config(page_title="PDF and Web Chat", layout="wide")
 
 st.markdown(
@@ -130,7 +121,11 @@ if st.session_state.get("kb_ready"):
         # Clear the session state
         st.session_state.clear()
         st.info("Restarting app from scratch…")
-        restart_streamlit_app()
+        st.rerun(scope="app")
+        st.markdown("""
+                <meta http-equiv="refresh" content="0">
+            """, unsafe_allow_html=True)
+        
 
 else:
     st.info("Please configure the knowledge base from the sidebar ⬅️")
